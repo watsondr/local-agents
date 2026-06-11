@@ -1,0 +1,8 @@
+# Editor / OS cruft
+*.swp
+*~
+.DS_Store
+
+# Scratch — keep agent definitions and intentional notes, ignore loose scratch
+**/scratch/
+**/*.tmp
