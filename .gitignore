@@ -6,3 +6,6 @@
 # Scratch — keep agent definitions and intentional notes, ignore loose scratch
 **/scratch/
 **/*.tmp
+
+# Per-repo to-do lists hold real backlog detail — keep them out of git
+todo-maintainer/todos/
