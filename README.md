@@ -76,7 +76,7 @@ Claim a color here when you add an agent so two agents never collide:
 
 | Color    | Agent          |
 | -------- | -------------- |
-| blue     | example-agent  |
+| blue     | _free_ (example-agent template uses it, but is not a live agent) |
 | red      | _free_         |
 | green    | _free_         |
 | yellow   | _free_         |
@@ -102,6 +102,9 @@ Claim a color here when you add an agent so two agents never collide:
 
 ## Notes
 
+- `example-agent/` is a **reference template, intentionally not a live agent** —
+  it has no top-level symlink, so Claude Code doesn't discover it. Copy it to
+  start a real agent (then create the symlink and claim a color).
 - This relocation is non-destructive: the rest of `~/.claude` (settings,
   credentials, history, sessions) is untouched.
 - Symlinks are committed to git as symlinks, so the layout is reproducible on
