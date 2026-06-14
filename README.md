@@ -81,7 +81,7 @@ Claim a color here when you add an agent so two agents never collide:
 | green    | todo-maintainer |
 | yellow   | _free_         |
 | purple   | _free_         |
-| orange   | _free_         |
+| orange   | diagnostics-tooling |
 | pink     | _free_         |
 | cyan     | _free_         |
 
