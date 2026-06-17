@@ -138,13 +138,13 @@ discoverable and freshness-checkable later. Include:
 Also add a short human-facing README note in the subfolder if the repo's
 tooling folders conventionally carry one.
 
-### 7. Commit
+### 7. Leave the files for the caller
 
-These tools are meant to **persist and be reused**, so commit them to the target
-repo (the tool subfolder + manifest). Only commit when the caller's workflow
-expects it / they've authorised committing; otherwise stage the files and tell
-the caller they're ready to commit. Never commit to a default branch without the
-caller's say-so — follow the repo's branching norms.
+These tools are meant to **persist and be reused**, so they're written into the
+target repo (the tool subfolder + manifest) as working-tree files. But **do not
+stage, commit, or otherwise prepare the changes for commit** — leave them
+unstaged in the working tree. The caller decides how and when the files enter
+version control; staging or committing is never your call.
 
 ## Report
 
@@ -155,8 +155,8 @@ Hand back to the caller, concisely:
 2. **Where it lives** — the tool subfolder path and manifest path.
 3. **How to enable and run it** — the exact activation steps and where output
    lands. This is the most important part; the caller acts on it.
-4. **Anything they must decide** — e.g. a large-divergence rebuild call, or that
-   files are staged awaiting their commit.
+4. **Anything they must decide** — e.g. a large-divergence rebuild call. Note
+   that the files are left unstaged in the working tree for them to handle.
 
 Do not include the diagnostic findings themselves — running it and reading the
 output is the caller's job.
@@ -170,5 +170,7 @@ output is the caller's job.
   area, with a manifest.
 - Don't leave temporary/inline diagnostics in product code — that's the exact
   thing this agent exists to replace.
+- Never stage or commit the tool — leave the files unstaged in the working tree
+  for the caller to handle.
 - Match the target repo's language, style, and conventions.
 - On large divergence, stop and ask rather than silently rebuilding.
