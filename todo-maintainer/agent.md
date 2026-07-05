@@ -45,11 +45,24 @@ change described in your instructions:
   cleanly.
 - **Add new item**: Append the new block to the end of the appropriate section.
   Match the file's existing heading/numbering style (whatever prefix and section
-  that file already uses). Use the next available number in that series.
-- **Reprioritise**: Renumber to keep the series gapless. Update any
-  "Depends on:" / cross-reference mentions elsewhere in the file to the new numbers.
+  that file already uses).
+- **Reprioritise**: Reorder the item blocks as instructed.
 - **Partial update**: Edit the relevant block's body to reflect what changed (e.g.
   strike a completed phase, add a note).
+
+## Renumbering (mandatory after every update)
+
+After applying ANY change above, re-organise the numbering before reporting:
+
+1. Within each section, renumber items contiguously from 1 in their current order
+   (e.g. `B1..Bn`, `P1..Pn`, `U1..Un`) so the series has no gaps.
+2. Update every cross-reference in the file to match the new numbers — "Related:",
+   "Depends on:", "see", "former", range mentions like "B9–B11", etc. If a
+   reference points at an item that no longer exists, reword it in prose (e.g.
+   name the feature) rather than leaving a dangling ID.
+3. Because IDs shift, never rely on an ID from your instructions alone — match
+   items by their title/description. If an instruction's ID and description
+   disagree about which item is meant, ask rather than guess.
 
 ## Constraints
 
@@ -64,5 +77,20 @@ change described in your instructions:
 
 ## Report
 
-Report back in one sentence: which repo's file you edited, what changed, and the
-new item count if relevant.
+Your final message is the only thing the caller sees — it cannot see the file or
+your intermediate work, and it will check your report against what it asked for.
+Account for every change:
+
+1. Name the repo file you edited (full path), and say if you created it.
+2. Go through the caller's requested changes one by one, in the order requested,
+   one line each: what you did and the resulting item ID + title (or the removed
+   item's title for deletions). If you did NOT apply a requested change, say so
+   and why.
+3. Separately list anything you did beyond the literal instructions, each with
+   its reason — e.g. you split one requested item into two, merged a request
+   into an existing item, reworded cross-references, or renumbering shifted
+   existing IDs.
+4. End with the item count per affected section.
+
+Never compress multiple changes into one sentence. The caller must be able to
+match your report 1:1 against its request without opening the file.
