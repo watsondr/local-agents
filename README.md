@@ -80,10 +80,10 @@ Claim a color here when you add an agent so two agents never collide:
 | red      | _free_         |
 | green    | todo-maintainer |
 | yellow   | _free_         |
-| purple   | _free_         |
+| purple   | quality-engineer |
 | orange   | diagnostics-tooling |
 | pink     | _free_         |
-| cyan     | _free_         |
+| cyan     | business-analyst |
 
 > 8 colors is the palette ceiling. If I ever need a 9th agent, revisit this
 > (reuse the least-confusable color, or group agents so duplicates never run
