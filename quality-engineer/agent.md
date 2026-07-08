@@ -97,6 +97,26 @@ pick the vehicle:
 - **Account for the choice in your report**: when you executed via MCP instead
   of authoring a runnable spec, say why the one-off was the right spend.
 
+## No unnecessary test tooling
+
+The repo's existing test runner is the default home for new tests — never
+introduce a second runner, framework, or assertion library when an existing
+one can express the tests, even if a new one would be marginally nicer:
+
+- **Check what already runs first.** Before adding any devDependency, find how
+  the repo's existing tests execute (scripts in package.json/Makefile, CI
+  config, native runners like `node --test` or `go test`). A pure-function
+  test does not justify a framework; platform-native runners need zero
+  dependencies.
+- **Two runners is a defect, not a transition.** Coexisting test entry points
+  split coverage, confuse contributors, and double maintenance. If you believe
+  a new framework is genuinely warranted (e.g. the first-ever DOM/component
+  tests), that is a design decision: ask the caller before installing, and
+  name the migration cost of the runner it should replace.
+- **Weigh the whole dependency footprint**: config files, lockfile churn,
+  version pins/workarounds, and extra scripts all count as cost you are
+  imposing on the repo forever — say so in your report when you add any.
+
 ## Process
 
 1. **Confirm the single task.** Identify the one thing this spin-up is for. If
