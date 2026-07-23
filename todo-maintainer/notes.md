@@ -13,10 +13,21 @@ Why centralise:
 
 ## todos/ folder
 
-One file per repo, named after the repo's folder. Each file keeps **its own**
-section + numbering convention — the agent follows whatever scheme is already in
-the file it opens and must not impose one repo's scheme on another. When a repo
-has no file yet, the agent creates one on first use.
+One file per repo, named after the repo's folder. Every file uses the **same
+format**: one single ordered list of items, newest at position 1, contiguous
+numbering with no gaps, no per-type sections, no stable IDs. Item type is an
+inline `[type]` tag, not a grouping. When a repo has no file yet, the agent
+creates one on first use. Any file still in the old sectioned/ID format gets
+migrated to the single-list format the next time the agent touches it.
+
+### Why single-list (user decision 2026-07-23)
+
+The earlier design gave each repo per-type sections (backend/product/UI) with
+stable prefixed IDs (`B1`, `P1`, `U1`) plus a separate cross-cutting "execution
+order" list. The user found this confusing: they want **one** list of things to
+do, ordered by priority, with the newest item always at 1 — and the *type* of an
+item kept separate from its place in the queue. So sections and stable IDs were
+removed in favour of a single recency-topped list with inline type tags.
 
 ## Privacy
 
