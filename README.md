@@ -77,7 +77,7 @@ Claim a color here when you add an agent so two agents never collide:
 | Color    | Agent          |
 | -------- | -------------- |
 | blue     | _free_ (example-agent template uses it, but is not a live agent) |
-| red      | _free_         |
+| red      | well-achktually |
 | green    | todo-maintainer |
 | yellow   | _free_         |
 | purple   | quality-engineer |
