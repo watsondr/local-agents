@@ -3,7 +3,8 @@ name: example-agent
 description: Reference template demonstrating the per-folder agent layout. Not meant to be invoked for real work — copy this folder as the starting point for a new agent, then rewrite the prompt.
 tools: Read, Grep, Glob
 model: sonnet
-color: blue
+# color: intentionally unset — claim one from the README's Color registry
+#        when you copy this folder into a real agent
 ---
 
 You are a template agent. Replace this entire prompt with the real instructions

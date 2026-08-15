@@ -15,21 +15,32 @@ available as a user-level subagent across **all** my projects.
 definition plus any supporting material (design notes, prompt iterations,
 example transcripts, reference files).
 
-Claude Code only discovers agent definitions as `*.md` files placed *directly*
-in the agents directory — it does **not** recurse into subfolders. To get the
-per-folder organization *and* keep agents discoverable, the canonical
-definition lives at `<name>/agent.md` and a symlink at the top level exposes it:
+Historically, Claude Code only discovered agent definitions as `*.md` files
+placed *directly* in the agents directory — it did **not** recurse into
+subfolders. To get the per-folder organization *and* keep agents discoverable,
+the canonical definition lives at `<name>/agent.md` with a top-level symlink:
 
 ```
 local-agents/
   README.md
-  <agent-name>.md            ->  <agent-name>/agent.md   (symlink; discovered by Claude Code)
+  <agent-name>.md            ->  <agent-name>/agent.md   (symlink)
   <agent-name>/
     agent.md                 # frontmatter + system prompt (the real file)
     notes.md                 # optional: design notes, examples, scratch
 ```
 
-The symlink is what Claude Code reads. The subfolder is the source of truth.
+The subfolder is the source of truth; the symlink exposes it at the top level.
+
+**Current Claude Code recurses into subfolders** (confirmed 2026-08-01: CC
+2.1.220 discovers `example-agent`, which has no symlink). So each agent is now
+found *twice* — once via the symlink, once via `<name>/agent.md`. This is
+harmless: both paths resolve to the same file, so the duplicate definitions are
+byte-identical and whichever wins the name collision is the same agent.
+
+**Keep the symlinks anyway.** Recursion is undocumented behaviour that appeared
+without announcement and could disappear the same way; the top-level `*.md`
+path has always worked. Dropping the symlinks would trade a harmless duplicate
+for the risk of every agent silently vanishing on some future update.
 
 ## Agent definition format
 
@@ -76,7 +87,7 @@ Claim a color here when you add an agent so two agents never collide:
 
 | Color    | Agent          |
 | -------- | -------------- |
-| blue     | _free_ (example-agent template uses it, but is not a live agent) |
+| blue     | no-ai-tells    |
 | red      | well-achktually |
 | green    | todo-maintainer |
 | yellow   | _free_         |
@@ -102,9 +113,13 @@ Claim a color here when you add an agent so two agents never collide:
 
 ## Notes
 
-- `example-agent/` is a **reference template, intentionally not a live agent** —
-  it has no top-level symlink, so Claude Code doesn't discover it. Copy it to
-  start a real agent (then create the symlink and claim a color).
+- `example-agent/` is a **reference template, not meant for real work.** It has
+  no top-level symlink, which used to keep it undiscovered — but since Claude
+  Code started recursing into subfolders it *is* discovered and offered as a
+  selectable `subagent_type`. Its `description` says not to invoke it, which is
+  what keeps it out of the way now. Copy it to start a real agent (then create
+  the symlink and claim a color). To hide it from the picker entirely, remove
+  its `name:` frontmatter or move it outside the agents directory.
 - This relocation is non-destructive: the rest of `~/.claude` (settings,
   credentials, history, sessions) is untouched.
 - Symlinks are committed to git as symlinks, so the layout is reproducible on
