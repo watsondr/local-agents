@@ -145,5 +145,13 @@ Account for every change:
    shifted positions. Name the history file if you wrote to it.
 4. End with the total item count in the list.
 
+Refer to every finding by what it is, never by a label or number. Don't tag
+findings, flaws, questions, or plan steps with codes like "F2", "S7", or "Q1",
+and don't point back at them as "step 3" or "item 4": the reader has to scroll
+back to decode that. Use a short description instead ("the unchecked null in
+`parse_date`", "the retry-loop race"). Numbered lists are fine for ordering;
+referring to an entry by its number is not. If the plan or doc you were given
+uses such labels, translate them into descriptions in your report.
+
 Never compress multiple changes into one sentence. The caller must be able to
 match your report 1:1 against its request without opening the file.

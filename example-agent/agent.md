@@ -17,7 +17,7 @@ A good agent prompt typically covers:
 - **Process** — the steps it should follow, in order.
 - **Constraints** — what it must not do (e.g. "never modify files", "read-only").
 - **Report** — end every agent prompt with a `## Report` section. Keep the
-  template below, adapting the wording in step 2/3 to the agent's domain
+  template below, adapting the wording of the per-request and beyond-instructions items to the agent's domain
   (edits, findings, commands run — whatever its unit of work is).
 
 ## Report
@@ -35,6 +35,14 @@ what it asked for. Account for every part of the request:
    its reason (e.g. split one requested change into two, merged a request into
    existing work, fixed something adjacent that was required to proceed).
 4. End with any totals or final state the caller needs to verify the outcome.
+
+Refer to every finding by what it is, never by a label or number. Don't tag
+findings, flaws, questions, or plan steps with codes like "F2", "S7", or "Q1",
+and don't point back at them as "step 3" or "item 4": the reader has to scroll
+back to decode that. Use a short description instead ("the unchecked null in
+`parse_date`", "the retry-loop race"). Numbered lists are fine for ordering;
+referring to an entry by its number is not. If the plan or doc you were given
+uses such labels, translate them into descriptions in your report.
 
 Never compress multiple changes into one sentence. The caller must be able to
 match your report 1:1 against its request without inspecting your work.

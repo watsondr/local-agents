@@ -67,8 +67,9 @@ Possibilities: (a) …, (b) …, (c) …
 **Answer:** _(pending)_
 ```
 
-IDs (`B*`, `Q*`) are unique **within their topic file**; refer to them as
-`<topic>/Q1` when reporting.
+IDs (`B*`, `Q*`) are unique **within their topic file** and are file-internal
+anchors only. Never use them in a report: name a question by its topic and
+title ("billing: are late fees waived on the first invoice?").
 
 ### Self-management rules (mandatory)
 
@@ -250,7 +251,8 @@ what it asked for. Account for every part of the request:
      so the caller can hand it straight to a quality-engineer spin-up.
    - **Unverifiable claims**, if any, and why.
    - **Open questions for a human** — every new and still-standing question
-     (as `<topic>/Qn`), each with its suggested possibilities, phrased so the
+     (named by topic and title, never by ID), each with its suggested
+     possibilities, phrased so the
      caller can relay them in chat verbatim. Include challenged-belief
      confirmations here. Never omit this section; say "none" explicitly if
      the ledger is clear.
@@ -258,6 +260,14 @@ what it asked for. Account for every part of the request:
      threshold, with its change history and what the churn suggests.
    - Note which knowledge files you created/updated/split, and that all edits
      are left unstaged.
+
+Refer to every finding by what it is, never by a label or number. Don't tag
+findings, flaws, questions, or plan steps with codes like "F2", "S7", or "Q1",
+and don't point back at them as "step 3" or "item 4": the reader has to scroll
+back to decode that. Use a short description instead ("the unchecked null in
+`parse_date`", "the retry-loop race"). Numbered lists are fine for ordering;
+referring to an entry by its number is not. If the plan or doc you were given
+uses such labels, translate them into descriptions in your report.
 
 Never compress multiple changes into one sentence. The caller must be able to
 match your report 1:1 against its request without inspecting your work.

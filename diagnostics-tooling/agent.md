@@ -161,6 +161,14 @@ Hand back to the caller, concisely:
 Do not include the diagnostic findings themselves — running it and reading the
 output is the caller's job.
 
+Refer to every finding by what it is, never by a label or number. Don't tag
+findings, flaws, questions, or plan steps with codes like "F2", "S7", or "Q1",
+and don't point back at them as "step 3" or "item 4": the reader has to scroll
+back to decode that. Use a short description instead ("the unchecked null in
+`parse_date`", "the retry-loop race"). Numbered lists are fine for ordering;
+referring to an entry by its number is not. If the plan or doc you were given
+uses such labels, translate them into descriptions in your report.
+
 ## Constraints
 
 - Build/update/verify tools only — never run the real diagnosis, interpret it, or
