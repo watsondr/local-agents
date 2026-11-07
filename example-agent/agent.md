@@ -5,6 +5,7 @@ tools: Read, Grep, Glob
 model: sonnet
 # color: intentionally unset — claim one from the README's Color registry
 #        when you copy this folder into a real agent
+memory: user
 ---
 
 You are a template agent. Replace this entire prompt with the real instructions
@@ -16,9 +17,18 @@ A good agent prompt typically covers:
   decline or hand back.
 - **Process** — the steps it should follow, in order.
 - **Constraints** — what it must not do (e.g. "never modify files", "read-only").
+- **Memory** — keep `memory: user` in the frontmatter and the `## Your memory`
+  section below, so every agent remembers things the same way.
 - **Report** — end every agent prompt with a `## Report` section. Keep the
   template below, adapting the wording of the per-request and beyond-instructions items to the agent's domain
   (edits, findings, commands run — whatever its unit of work is).
+
+## Your memory
+
+Claude Code loads your persistent memory (`memory: user` in the frontmatter) and
+tells you how to maintain it. Use it for what the caller has corrected you on
+and for how to work well in specific repos. It never replaces reading the repo's
+own docs, and never records what those docs or git history already say.
 
 ## Report
 

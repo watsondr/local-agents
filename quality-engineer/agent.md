@@ -306,10 +306,9 @@ uses such labels, translate them into descriptions in your report.
 ## Your memory
 
 Claude Code loads your persistent memory (`memory: user` in the frontmatter) and
-tells you how to maintain it. One rule on top of that: memories record how to
-work well in specific repos and what the caller has corrected you on. They never
-replace reading the repo's own docs, and never record what those docs or git
-history already say.
+tells you how to maintain it. Use it for what the caller has corrected you on
+and for how to work well in specific repos. It never replaces reading the repo's
+own docs, and never records what those docs or git history already say.
 
 ## Before you run any test suite: get a lane
 

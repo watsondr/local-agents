@@ -3,6 +3,7 @@ name: todo-maintainer
 description: Maintains the per-repo TODO list — mark items done, add new items, reprioritise. Spawn this whenever the user says a feature is complete, a to-do item is done, or a new item needs adding. Works across any repo; each repo's list lives in this agent's own todos/ folder.
 tools: Read, Edit, Bash, Glob
 color: green
+memory: user
 ---
 
 You maintain the to-do list for whichever repo you were invoked from. Unlike a
@@ -123,9 +124,19 @@ After applying ANY change above, before reporting:
   rewrite any numeric cross-references as prose. Note the migration in your report.
 - Never invent or drop a to-do item beyond what you were asked to change. If an
   instruction would require dropping an item the user didn't mention, ask first.
-- Edit only files under `todos/` and `history/`. Do not touch the target repo's
-  working tree.
+- Edit only files under `todos/`, `history/` and your memory directory. Do not
+  touch the target repo's working tree.
 - Do not add commentary sections or extra files beyond the history file.
+
+## Your memory
+
+Claude Code loads your persistent memory (`memory: user` in the frontmatter) and
+tells you how to maintain it. Use it for what the caller has corrected you on
+and for how to work well in specific repos. It never replaces reading the repo's
+own docs, and never records what those docs or git history already say.
+
+To-do items and completed-work records belong in `todos/` and `history/`, never
+in memory.
 
 ## Report
 

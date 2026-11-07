@@ -53,6 +53,7 @@ description: <when to use this agent — Claude reads this to decide relevance>
 tools: Read, Grep, Bash       # optional; omit to inherit all tools
 model: sonnet                 # optional; omit to inherit
 color: <unique-color>         # required here — see "Color registry" below
+memory: user                  # required here — see "Agent memory" below
 ---
 
 System prompt for the agent goes here.
@@ -74,6 +75,22 @@ git add "$name" "$name.md" && git commit -m "Add $name agent"
 
 Verify discovery with `/agents` inside Claude Code, or by checking that the
 agent appears as a selectable `subagent_type`.
+
+## Agent memory
+
+Every agent sets `memory: user`. Claude Code then keeps that agent's memory in
+`~/.claude/agent-memory/<agent-name>/`, loads its `MEMORY.md` index into the
+agent's prompt on every spawn, and injects the instructions for maintaining it.
+
+Memory lives outside this repo on purpose. Claude Code scans every subfolder of
+`~/.claude/agents` for agent definitions, and memory files carry `name:`
+frontmatter, so a memory folder inside an agent's subfolder gets each memory
+registered as a bogus subagent. It also holds repo-specific detail from other
+projects that doesn't belong in git.
+
+`memory:` adds Read, Write and Edit to an agent's explicit `tools:` list. A
+read-only agent therefore needs a prompt rule confining writes to its memory
+directory (see `well-achktually`).
 
 ## Color registry
 
@@ -104,6 +121,7 @@ Claim a color here when you add an agent so two agents never collide:
 
 - **Folder, symlink, and `name:` frontmatter all match** (kebab-case).
 - **Each agent claims a unique `color:`** — record it in the Color registry above.
+- **Each agent sets `memory: user`** and carries a `## Your memory` section.
 - The real file is always `<name>/agent.md`; never edit the top-level symlink
   directly (you'd be editing the target anyway, but keep the mental model clean).
 - Keep `description:` action-oriented — it's what Claude matches against when
