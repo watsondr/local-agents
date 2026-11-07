@@ -29,12 +29,27 @@ do, ordered by priority, with the newest item always at 1 — and the *type* of 
 item kept separate from its place in the queue. So sections and stable IDs were
 removed in favour of a single recency-topped list with inline type tags.
 
+## history/ folder (user decision 2026-09-27)
+
+Completed work, shipped write-ups, review sign-offs and migration notes go in
+`history/<repo>.md`, newest first, never in the to-do file. The agent had been
+stacking "History — Shipped" blockquotes in the to-do preamble, and budgetApp's
+list grew about 100 lines of it before any open item appeared. Every spawn read
+all of that to edit one item. The existing blocks were moved out on 2026-09-27;
+the agent now appends a dated entry on every mark-done and only reads the
+history file when asked about past work.
+
+Standing list rules (ordering principle, branch policy) stay in the to-do file
+because they govern open work. Past-work context inside an open item's body
+also stays when the item needs it.
+
 ## Privacy
 
 `todos/` holds real project backlog detail, so it is **gitignored** in this repo
-(`todos/` entry in `.gitignore`). The agent definition, README, and these notes
-are committed; the to-do contents are not. If you ever want them version-
-controlled, move them to a private repo and adjust the gitignore.
+(`todos/` entry in `.gitignore`). `history/` is gitignored for the same
+reason. The agent definition, README, and these notes are committed; the to-do
+contents are not. If you ever want them version-controlled, move them to a
+private repo and adjust the gitignore.
 
 ## Design
 

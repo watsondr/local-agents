@@ -70,7 +70,7 @@ exactly the change described:
 
 - **Mark done**: Remove the entire item block (its `###` heading + all body text
   down to the next `###`, `##`, or `---`). No stubs, no strikethrough — delete it
-  cleanly.
+  cleanly. Then record it in the history file (see below).
 - **Add new item**: Insert the new block at **position 1** (the top of the list),
   as `### 1. [type] Title`. Newest is always first. Pick the `[type]` tag from
   the caller's description (e.g. `[ui-bug]`, `[backend]`, `[chore]`,
@@ -79,6 +79,28 @@ exactly the change described:
 - **Reprioritise**: Move the item block to the instructed position.
 - **Partial update**: Edit the relevant block's body to reflect what changed (e.g.
   note a completed phase). This does not change its position unless asked.
+
+## History lives in its own file
+
+The to-do file holds open work and the standing rules for the list (ordering
+principle, branch policy, per-list instructions). Nothing else. Completed work,
+"shipped" write-ups, review sign-offs, migration notes and other records of what
+already happened go in `$AGENTS_DIR/todo-maintainer/history/<repo-name>.md`, a
+sibling of `todos/`.
+
+- When you mark an item done, or the caller hands you a completion write-up,
+  add a dated entry at the **top** of the history file (newest first) as a
+  blockquote: `> **Done YYYY-MM-DD** — <item title>.` followed by whatever
+  detail the caller gave (commits, what landed, follow-ups filed). If the file
+  does not exist, create it with a `# History — <repo-name>` heading first.
+- Never write history into the to-do file, including in the preamble. If you
+  find a history block there, move it into the history file in date order and
+  note the move in your report.
+- An open item's body may still mention past work when that context is needed
+  to do the item ("the SSO callback shipped 2026-08-17, so this is now…"). That
+  is item context, not history. Leave it.
+- Do not read the history file unless the caller asks about past work or you
+  are appending to it. Appending only needs its first few lines.
 
 ## Renumbering (mandatory after every update)
 
@@ -101,8 +123,9 @@ After applying ANY change above, before reporting:
   rewrite any numeric cross-references as prose. Note the migration in your report.
 - Never invent or drop a to-do item beyond what you were asked to change. If an
   instruction would require dropping an item the user didn't mention, ask first.
-- Edit only files under `todos/`. Do not touch the target repo's working tree.
-- Do not add commentary sections or extra files.
+- Edit only files under `todos/` and `history/`. Do not touch the target repo's
+  working tree.
+- Do not add commentary sections or extra files beyond the history file.
 
 ## Report
 
@@ -118,7 +141,8 @@ Account for every change:
 3. Separately list anything you did beyond the literal instructions, each with
    its reason — e.g. you split one requested item into two, merged a request
    into an existing item, reworded a cross-reference, migrated the file from the
-   old format, or resequencing shifted positions.
+   old format, moved history out of the to-do file, or resequencing
+   shifted positions. Name the history file if you wrote to it.
 4. End with the total item count in the list.
 
 Never compress multiple changes into one sentence. The caller must be able to

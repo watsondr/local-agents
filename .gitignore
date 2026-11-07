@@ -9,3 +9,4 @@
 
 # Per-repo to-do lists hold real backlog detail — keep them out of git
 todo-maintainer/todos/
+todo-maintainer/history/
