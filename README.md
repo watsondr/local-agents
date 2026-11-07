@@ -89,8 +89,10 @@ registered as a bogus subagent. It also holds repo-specific detail from other
 projects that doesn't belong in git.
 
 `memory:` adds Read, Write and Edit to an agent's explicit `tools:` list. A
-read-only agent therefore needs a prompt rule confining writes to its memory
-directory (see `well-achktually`).
+read-only agent needs a guard that confines writes to its memory directory.
+`well-achktually` does this with a `PreToolUse` hook in its frontmatter
+(`well-achktually/hooks/memory-only-writes.sh`) that blocks Edit and Write on
+any path outside `~/.claude/agent-memory/well-achktually/`.
 
 ## Color registry
 
